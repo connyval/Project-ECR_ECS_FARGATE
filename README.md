@@ -126,14 +126,14 @@ docker push xxxxxxxx.dkr.ecr.us-east-1.amazonaws.com/mi-sitio-web-repo:v1.0
 - Elegir el cluster y la task definition
 - Posterior, a nivel de task queda creada 
 
-*** 4. Exponer y navegar el sitio web ***
+**4. Exponer y navegar el sitio web**
 
 - A nivel de la task en **networking**, aparece la IP publica para navegarla
 - Se navega a puerto 80 en dirrecion publica y navega el sitio con fargate.
 - Tener en cuenta el **SecurityGroup** abierto al puerto correspondiente 
 - Actualizar el service con 2 tareas
 
-*** 5. En caso de ajustes, se crea una nueva versión (REVISION)***
+**5. En caso de ajustes, se crea una nueva versión (REVISION)**
 
 - Al  realizar cambios  en el proyecto, es necesario crear la imagen nuevamente y etiquetarla con Version 2 . Para  luego subiría al repositorio ECR, nuevamente 
 
@@ -150,16 +150,18 @@ Luego a nivel de TASK DEFINITION para cambiar en producción, se crea una nueva 
 
 Así mismo, se debe cambiar en  2 replicas, se verifica los cambios  en la  en ficha task
 
-Donde esta aprovisionando, 2 contenedores basado en el ultimo task definition, revision 2.  El servicio estará actualizando y reemplazando los contenedores con vr anterior, gradualmente.
+- Donde esta aprovisionando, 2 contenedores basado en el ultimo task definition, revision 2.  El servicio estará actualizando y reemplazando los contenedores con vr anterior, gradualmente.
 
 Quedando,  al final 2 contenedores (según capacidad deseada) y con la ultima version actualizada
 
-- Finalmente, se verifica, navegando la dirección publica nueva, para comprobar la actualización de los 2 contenedores. Quedando activa la solución.
+- Finalmente, se verifica, navegando la dirección publica nueva, para comprobar la actualización de los 2 contenedores. Quedando activa la solución por puerto 8080
 
-Posteriormente, al borrar el cluster, borrara todos los servicios y configuraciones realizadas.  
+**6. Posteriormente, Se configura a traves de Balanceador de carga para aplicaciones que se exponga hacia internet por protocolo seguro, la aplicacion gestionada por ESC-Fargate**
+
+Al final se borra el cluster, se borraran todos los servicios y configuraciones realizadas.  
 
 ### Technical Desing:
 
-![Technical Desing](https://ocvpprofessional.cloud/wp-content/uploads/2025/11/WP-docker-Orbstack-AwsQ.png)
+![Technical Desing](https://ocvpprofessional.cloud/wp-content/uploads/2025/11/09-nov-25-proy-docker-ECR-ECS_FARGATE.png)
 
 Gracias a la guia de: https://github.com/Jona-Baez/Sitio-web-con-Docker-ECR-y-ECS/blob/main/Dockerfile
